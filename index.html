@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do List App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="todo-container">
+    <h2>📝 To-Do List</h2>
+
+    <div class="input-box">
+        <input type="text" id="taskInput" placeholder="Enter a task">
+        <button onclick="addTask()">Add</button>
+    </div>
+
+    <ul id="taskList"></ul>
+</div>
+
+<script>
+    function addTask() {
+        const input = document.getElementById("taskInput");
+        const taskText = input.value.trim();
+
+        if (taskText === "") {
+            alert("Please enter a task");
+            return;
+        }
+
+        const li = document.createElement("li");
+
+        li.innerHTML = `
+            <label>
+                <input type="checkbox" onclick="toggleTask(this)">
+                <span>${taskText}</span>
+            </label>
+            <button onclick="deleteTask(this)">❌</button>
+        `;
+
+        document.getElementById("taskList").appendChild(li);
+        input.value = "";
+    }
+
+    function deleteTask(btn) {
+        btn.parentElement.remove();
+    }
+
+    function toggleTask(checkbox) {
+        const taskText = checkbox.nextElementSibling;
+        taskText.classList.toggle("completed");
+    }
+</script>
+
+</body>
+</html>
